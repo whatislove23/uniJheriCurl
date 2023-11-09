@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jheri Curl</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <section class="hero">
+      <header>
+        <a href="/"><img src="./img/logo.svg" alt="Jheri Curl logo" /></a>
+        <nav>
+          <ul class="menu">
+            <li><a href="#team" class="menu_link">Our team</a></li>
+            <li><a href="#products" class="menu_link">Our products</a></li>
+            <li><a href="#onmap" class="menu_link">The salon</a></li>
+            <li><a href="#" class="menu_link">Contact</a></li>
+            <li id="cart">
+              <svg
+                fill="#ffffff"
+                height="20px"
+                width="20px"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 189.948 189.948"
+                xml:space="preserve"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <g>
+                      <g>
+                        <path
+                          d="M164.613,56.66L132.259,9.34c-2.371-3.467-7.106-4.357-10.576-1.986c-3.469,2.374-4.357,7.106-1.986,10.576 l26.437,38.659H43.815L70.247,17.93c2.374-3.469,1.484-8.202-1.986-10.576C64.792,4.98,60.057,5.873,57.688,9.34L25.334,56.66 C11.248,57.375,0,69.026,0,83.29c0,7.033,2.787,13.69,7.74,18.682l10.708,63.311c0.378,10.343,8.91,18.641,19.341,18.641h114.367 c10.431,0,18.963-8.296,19.341-18.641l10.708-63.308c4.953-4.994,7.743-11.651,7.743-18.684 C189.947,69.029,178.699,57.375,164.613,56.66z M170.373,92.179l-2.252,1.811l-11.722,69.306l-0.107,1.268 c0,2.28-1.854,4.139-4.137,4.139H37.789c-2.283,0-4.139-1.856-4.139-4.139L21.821,93.992l-2.25-1.811 c-2.77-2.229-4.357-5.471-4.357-8.894c0-6.333,5.148-11.481,11.476-11.481h136.558c6.328,0,11.476,5.151,11.476,11.481 C174.73,86.713,173.143,89.955,170.373,92.179z"
+                        />
+                        <path
+                          d="M131.793,91.687c-4.202,0-7.609,3.406-7.609,7.609v53.333c0,4.202,3.406,7.609,7.609,7.609s7.609-3.406,7.609-7.609 V99.295C139.401,95.093,135.995,91.687,131.793,91.687z"
+                        />
+                        <path
+                          d="M94.975,91.687c-4.202,0-7.609,3.406-7.609,7.609v53.333c0,4.202,3.406,7.609,7.609,7.609 c4.202,0,7.609-3.406,7.609-7.609V99.295C102.584,95.093,99.177,91.687,94.975,91.687z"
+                        />
+                        <path
+                          d="M58.152,91.687c-4.202,0-7.609,3.406-7.609,7.609v53.333c0,4.202,3.406,7.609,7.609,7.609s7.609-3.406,7.609-7.609 V99.295C65.763,95.093,62.355,91.687,58.152,91.687z"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </li>
+          </ul>
+        </nav>
+        <div id="modal" class="modal">
+          <button id="close" class="close">X</button>
+          <nav>
+            <h2 class="menu_title">Menu</h2>
+            <ul class="modal_menu">
+              <li><a href="#team" class="modal_menu_link">Our team</a></li>
+              <li>
+                <a href="#products" class="modal_menu_link">Our products</a>
+              </li>
+              <li><a href="#onmap" class="modal_menu_link">The salon</a></li>
+              <li><a href="#" class="modal_menu_link">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+        <svg
+          id="burger"
+          class="burger"
+          width="50px"
+          height="50px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M4 18L20 18"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M4 12L20 12"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M4 6L20 6"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </g>
+        </svg>
+      </header>
+      <h1 class="hero_title">
+        Unlock Your Ultimate Hair <br />
+        Transformation!
+      </h1>
+      <button type="button" class="hero_btn">Discover now</button>
+    </section>
+    <main>
+      <section id="team">
+        <div class="container">
+          <h2>Our team</h2>
+          <div class="team_members">
+            <div class="member_card">
+              <img
+                class="member_card_img"
+                src="./img/628d52cd8435ad0892e221e66070299a.jpeg"
+                alt="Michel"
+              />
+              <p>Michel</p>
+            </div>
+            <div class="member_card">
+              <img
+                class="member_card_img"
+                src="./img/9616fa02a80e9d1714bb9f732de990fd.jpeg"
+                alt="Hanna"
+              />
+              <p>Hanna</p>
+            </div>
+            <div class="member_card">
+              <img
+                class="member_card_img"
+                src="./img/561666ee66abd47b97e9c052d210bf40.jpeg"
+                alt="John"
+              />
+              <p>John</p>
+            </div>
+          </div>
+          <button type="button" class="hero_btn member_btn">Book now</button>
+        </div>
+      </section>
+      <section class="container_gray" id="products">
+        <div class="container">
+          <h2>Our products</h2>
+          <div class="products">
+            <div class="product" id="1">
+              <img
+                class="product_img"
+                src="./img/5fbb3980d329cb3b684cfe2cfe9cfc62.png"
+                alt=""
+              />
+              <p class="product_title">After-Shave Cooling gel</p>
+              <p class="product_price">12$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+            <div class="product" id="2">
+              <img class="product_img" src="./img/shave.png" alt="" />
+              <p class="product_title">EFFICIENT TI-5 - MACHINED FINISH</p>
+              <p class="product_price">312$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+            <div class="product" id="3">
+              <img class="product_img" src="./img/shave_case.png" alt="" />
+              <p class="product_title">RAZOR TRAVEL CASE</p>
+              <p class="product_price">12$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+            <div class="product" id="4">
+              <img class="product_img" src="./img/brush.png" alt="" />
+              <p class="product_title">24MM SYNTHETIC SHAVING BRUSH</p>
+              <p class="product_price">20$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+            <div class="product" id="5">
+              <img class="product_img" src="./img/pomade.png" alt="" />
+              <p class="product_title">POMADE FOR MEN</p>
+              <p class="product_price">12$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+            <div class="product" id="6">
+              <img class="product_img" src="./img/razor2.png" alt="" />
+              <p class="product_title">Z074 TI-5 - MACHINED FINISH</p>
+              <p class="product_price">400$</p>
+              <button class="hero_btn member_btn product_btn">
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="onmap">
+        <div class="container">
+          <h2>We’re on the map</h2>
+          <address>
+            123 Serenity Lane Dreamville, Imagination County Cloud Nine, A1A 1A1
+          </address>
+          <div id="map"></div>
+        </div>
+      </section>
+      <section class="container_gray">
+        <div class="container">
+          <h2>Feedbacks</h2>
+          <div class="feedbacks_container">
+            <div class="feedback_item">
+              <img src="./img/feed.svg" alt="Avatar" />
+              <p class="feedback_author">Sarah</p>
+              <p class="feedback_article">
+                I had an amazing experience at this salon! The staff was
+                friendly and professional, and my stylist, Hanna, did a
+                fantastic job. She listened to what I wanted and gave me the
+                perfect haircut. I left feeling like a new person. I'll
+                definitely be coming back!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer_container">
+        <div class="footer_col">
+          <h2>About the shop</h2>
+          <p class="footer_description">
+            Jheri Curl is a company encountered on the various fora over the
+            past year with increasing frequency.
+          </p>
+          <div>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+          </div>
+        </div>
+        <div class="footer_col">
+          <h2>Newsletter</h2>
+          <p class="">
+            Subscribe to receive updates, access to exclusive deals, and more.
+          </p>
+          <form action="#" method="post">
+            <input
+              class="footer_email_subscribe"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+            />
+            <button type="submit" class="footer_subscribe_btn">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
+    <div id="alert" class="alert">
+      <p>Item added to cart!</p>
+      <div class="line"></div>
+    </div>
+    <div id="cart_modal">
+      <div class="cart_body">
+        <button class="close" id="cart_close">X</button>
+        <div>
+          <h2 class="cart_title">Cart</h2>
+          <ol id="cart_items"></ol>
+        </div>
+
+        <div>
+          <button class="footer_subscribe_btn">Order</button>
+          <button class="footer_subscribe_btn cart_delete" id="delete_cart">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./scripts/map.js"></script>
+  <script src="./scripts/index.js"></script>
+</html>
